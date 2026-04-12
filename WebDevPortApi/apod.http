@@ -1,0 +1,11 @@
+@apod_HostAddress = http://localhost:5278
+
+GET {{apod_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{apod_HostAddress}}/todos/1
+Accept: application/json
+
+###
