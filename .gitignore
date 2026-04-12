@@ -106,3 +106,51 @@ publish/
 # 🔵 Azure
 #######################################
 .azure/
+
+#######################################
+# 🔴 Angular - extras importantes
+#######################################
+
+# Angular cache (novo nas versões recentes)
+.angular/cache/
+
+# Build interno do Angular CLI
+.angular/
+
+# Arquivos de build específicos
+*.tsbuildinfo
+
+# SSR / Angular Universal
+dist-server/
+server/
+
+# Arquivos temporários do Angular CLI
+.angular-tmp/
+
+# Karma (testes)
+karma.conf.js
+/tmp/karma_*
+
+# ESLint cache
+.eslintcache
+
+# Style preprocessors cache
+.sass-cache/
+
+# Compodoc (se usar documentação)
+documentation/
+
+# Storybook (se usar)
+storybook-static/
+
+#######################################
+# 🔴 Ambiente local Angular (extra seguro)
+#######################################
+
+# Variáveis locais
+.env
+.env.local
+.env.*.local
+
+# Angular config local overrides
+angular.json.local
