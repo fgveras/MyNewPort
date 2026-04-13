@@ -12,5 +12,11 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="WebDevPortRn">
+      <HintPath>..\WebDevPortRn\WebDevPortRn\WebDevPortRn\bin\Debug\net10.0\WebDevPortRn.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   
 </Project>

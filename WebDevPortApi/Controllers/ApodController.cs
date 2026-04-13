@@ -1,15 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebDevPortRn.APOD;
+using WebDevPortRn.Models;
 
 namespace apod.Controllers
 {
+
+    public class GlobalResponse
+    {
+        public object? Data { get; set; }
+        public bool Error { get; set; } = false;
+    }
+
     [ApiController]
     [Route("[controller]")]  
     public class ApodController : ControllerBase
     {
-        [HttpGet("teste")]  
-        public IActionResult Teste()
+
+        private readonly ApodRn _apodService;
+
+        public ApodController(ApodRn apodService)
         {
-            return Ok(new { message = "200" });
+            _apodService = apodService;
+        }
+
+        [HttpGet("teste")]  
+        public async Task<IActionResult> Teste()
+        {
+
+            GetPhotoModel response = await _apodService.GetPhoto();
+
+            return Ok(response);
         }
 
         [HttpGet("GetApod")] 

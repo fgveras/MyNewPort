@@ -13,13 +13,22 @@ export class ApodComponent {
     private _service: ApodService,
   ){}
 
-  public testeHttp(){
+  public imageSource: string = '';
+  public exp: string = '';
+
+  public testeHttp(){    
     this._service.teste().subscribe({
       next: response => {
-        alert(response.Data);
+        this.exp = response.explanation;
+        this.imageSource = response.hdurl;
       }, error: error => {
         
       }
     })
+  }
+
+  public clearImage(){
+    this.imageSource = '';
+    this.exp = '';
   }
 }
