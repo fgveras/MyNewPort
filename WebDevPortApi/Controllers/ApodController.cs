@@ -1,18 +1,20 @@
-﻿using System.Web.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace apod.Controllers
 {
-    [RoutePrefix("/ApodController")]
-    public class ApodController : ApiController
+    [ApiController]
+    [Route("[controller]")]  
+    public class ApodController : ControllerBase
     {
-
-        [Route("GetApod")]
-        [HttpGet]
-        public IHttpActionResult GetApod()
+        [HttpGet("teste")]  
+        public IActionResult Teste()
         {
+            return Ok(new { message = "200" });
+        }
 
-
-
+        [HttpGet("GetApod")] 
+        public IActionResult GetApod()
+        {
             return Ok();
         }
     }
