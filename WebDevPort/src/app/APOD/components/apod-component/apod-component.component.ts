@@ -31,4 +31,15 @@ export class ApodComponent {
     this.imageSource = '';
     this.exp = '';
   }
+
+  public download(){
+    
+    const link = document.createElement('a');
+    link.href = this.imageSource;
+    link.download = 'Astronomic Image Of the Day';
+    link.target = '_blank';
+
+    document.body.appendChild(link);
+    link.click();
+  }
 }

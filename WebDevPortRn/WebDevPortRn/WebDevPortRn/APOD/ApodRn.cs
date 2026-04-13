@@ -35,7 +35,7 @@ namespace WebDevPortRn.APOD
             var data = await response.Content.ReadFromJsonAsync<GetPhotoModel>(options);
 
             return data;
-        }
+        }        
 
     }
 }
