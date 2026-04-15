@@ -35,7 +35,27 @@ namespace WebDevPortRn.APOD
             var data = await response.Content.ReadFromJsonAsync<GetPhotoModel>(options);
 
             return data;
-        }        
+        }
+
+        public async Task<List<GetPhotoModel>> GetPhotoByPeriod(DateTime initialDate, DateTime finalDate)
+        {
+
+            var options = new JsonSerializerOptions
+            {
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+            };
+
+            var start_date = initialDate.ToString("yyyy-MM-dd");
+            var end_date = finalDate.ToString("yyyy-MM-dd");
+
+            var response = await _httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}&start_date={start_date}&end_date={end_date}");
+
+            response.EnsureSuccessStatusCode();
+
+            var data = await response.Content.ReadFromJsonAsync<List<GetPhotoModel>>(options);
+
+            return data;
+        }
 
     }
 }

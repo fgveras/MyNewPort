@@ -36,5 +36,25 @@ export class ApodService {
 
   }
 
+  public getPeriod(init: string, end: string): Observable<GetPhotoModel[]> {
+
+    const params = new HttpParams() 
+      .set('intialDate', init)
+      .set('finalDate', end);
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    
+    const url = `${this._BASE_URL}/GetPriod`;
+
+    return this._HttpClient
+      .get<GetPhotoModel[]>(url, {params: params, headers: headers})
+        .pipe(take(1), tap(response => {
+          
+        }
+    ))
+
+  }
+
   private showErrorMessage(response: GlobalResponse): void { if (response.Error) throw Error(response.Data); }
 }

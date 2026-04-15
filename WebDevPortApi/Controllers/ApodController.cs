@@ -32,6 +32,15 @@ namespace apod.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetPriod")]
+        public async Task<IActionResult> Teste([FromQuery] DateTime intialDate, [FromQuery] DateTime finalDate)
+        {
+
+            List<GetPhotoModel> response = await _apodService.GetPhotoByPeriod(intialDate, finalDate);
+
+            return Ok(response);
+        }
+
         [HttpGet("GetApod")] 
         public IActionResult GetApod()
         {

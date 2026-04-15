@@ -1,22 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <PublishAot>true</PublishAot>
+    <!-- Remova PublishAot se quiser usar Swagger em dev -->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="WebDevPortRn">
-      <HintPath>..\WebDevPortRn\WebDevPortRn\WebDevPortRn\bin\Debug\net10.0\WebDevPortRn.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\WebDevPortRn\WebDevPortRn\WebDevPortRn\WebDevPortRn.csproj" />
   </ItemGroup>
-  
 </Project>
