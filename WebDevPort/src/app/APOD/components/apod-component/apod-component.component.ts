@@ -16,13 +16,17 @@ export class ApodComponent {
   public imageSource: string = '';
   public exp: string = '';
 
+  public isLoading: boolean = false;
+
   public testeHttp(){    
+    this.isLoading = true;
     this._service.teste().subscribe({
       next: response => {
         this.exp = response.explanation;
         this.imageSource = response.hdurl;
+        this.isLoading = false;
       }, error: error => {
-        
+        this.isLoading = false;
       }
     })
   }
