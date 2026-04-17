@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Json;
-using System.Text;
+﻿using RestSharp;
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using WebDevPortRn.Models;
 
 namespace WebDevPortRn.APOD
@@ -20,41 +16,41 @@ namespace WebDevPortRn.APOD
         }
 
 
-        public async Task<GetPhotoModel> GetPhoto()
+        public GetPhotoModel GetPhoto()
         {
 
-            var options = new JsonSerializerOptions
+            var client = new RestClient();
+            var request = new RestRequest($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}", Method.Get);
+
+            var response = client.ExecuteGet(request);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.OK) 
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
-            };
-
-            var response = await _httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}");
-            
-            response.EnsureSuccessStatusCode();
-
-            var data = await response.Content.ReadFromJsonAsync<GetPhotoModel>(options);
-
-            return data;
+                return JsonSerializer.Deserialize<GetPhotoModel>(response.Content);
+                 
+            }else
+            {
+                throw new Exception($"Error: {response.StatusCode}");
+            }        
         }
 
-        public async Task<List<GetPhotoModel>> GetPhotoByPeriod(DateTime initialDate, DateTime finalDate)
+        public List<GetPhotoModel> GetPhotoByPeriod(DateTime initialDate, DateTime finalDate)
         {
 
-            var options = new JsonSerializerOptions
+            var client = new RestClient();
+            var request = new RestRequest($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}&start_date={initialDate.ToString("yyyy-MM-dd")}&end_date={finalDate.ToString("yyyy-MM-dd")}", Method.Get);
+
+            var response = client.ExecuteGet(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
-            };
+                return JsonSerializer.Deserialize<List<GetPhotoModel>>(response.Content);
 
-            var start_date = initialDate.ToString("yyyy-MM-dd");
-            var end_date = finalDate.ToString("yyyy-MM-dd");
-
-            var response = await _httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}&start_date={start_date}&end_date={end_date}");
-
-            response.EnsureSuccessStatusCode();
-
-            var data = await response.Content.ReadFromJsonAsync<List<GetPhotoModel>>(options);
-
-            return data;
+            }
+            else
+            {
+                throw new Exception($"Error: {response.StatusCode}");
+            }
         }
 
     }

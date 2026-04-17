@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebDevPortRn.APOD;
 using WebDevPortRn.Models;
+using WebDevDAL;
+using static WebDevDAL.RequestModels;
 
 namespace apod.Controllers
 {
@@ -24,21 +26,25 @@ namespace apod.Controllers
         }
 
         [HttpGet("teste")]  
-        public async Task<IActionResult> Teste()
+        public IActionResult Teste()
         {
 
-            GetPhotoModel response = await _apodService.GetPhoto();
+            GenericResponse<GetPhotoModel> ret = new GenericResponse<GetPhotoModel>();
 
-            return Ok(response);
+            ret.Data = _apodService.GetPhoto();
+
+            return Ok(ret);
         }
 
         [HttpGet("GetPriod")]
-        public async Task<IActionResult> Teste([FromQuery] DateTime intialDate, [FromQuery] DateTime finalDate)
+        public IActionResult Teste([FromQuery] DateTime intialDate, [FromQuery] DateTime finalDate)
         {
 
-            List<GetPhotoModel> response = await _apodService.GetPhotoByPeriod(intialDate, finalDate);
+            GenericResponse<List<GetPhotoModel>> ret = new GenericResponse<List<GetPhotoModel>>();
 
-            return Ok(response);
+            ret.Data = _apodService.GetPhotoByPeriod(intialDate, finalDate);
+
+            return Ok(ret);
         }
 
         [HttpGet("GetApod")] 

@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <BaseOutputPath>C:\Users\nando\Documents\Code\portfolio\Bin</BaseOutputPath>
     <!-- Remova PublishAot se quiser usar Swagger em dev -->
   </PropertyGroup>
 
@@ -13,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebDevPortRn\WebDevPortRn\WebDevPortRn\WebDevPortRn.csproj" />
+    <Reference Include="WebDevDAL">
+      <HintPath>..\WebDevDAL\WebDevDAL\WebDevDAL\bin\Debug\net10.0\WebDevDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDevPortRn">
+      <HintPath>..\WebDevPortRn\WebDevPortRn\WebDevPortRn\bin\Debug\net10.0\WebDevPortRn.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

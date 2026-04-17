@@ -7,8 +7,4 @@
     <BaseOutputPath>C:\Users\nando\Documents\Code\portfolio\Bin</BaseOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="RestSharp" Version="114.0.0" />
-  </ItemGroup>
-
 </Project>
