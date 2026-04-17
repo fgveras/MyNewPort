@@ -1,4 +1,5 @@
 using WebDevPortRn.APOD;
+using WebDevPortRn.FINNAS;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ builder.Services.AddControllers();
 // builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<ApodRn>();
+builder.Services.AddScoped<Finnas>();
 
 builder.Services.AddCors(options =>
 {

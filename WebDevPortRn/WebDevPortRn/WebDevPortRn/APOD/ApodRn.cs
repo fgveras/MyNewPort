@@ -15,7 +15,6 @@ namespace WebDevPortRn.APOD
             _httpClient = httpClient;
         }
 
-
         public GetPhotoModel GetPhoto()
         {
 

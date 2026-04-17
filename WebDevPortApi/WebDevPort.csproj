@@ -6,6 +6,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <BaseOutputPath>C:\Users\nando\Documents\Code\portfolio\Bin</BaseOutputPath>
     <!-- Remova PublishAot se quiser usar Swagger em dev -->
+	  <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,11 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebDevPortRn\WebDevPortRn\WebDevPortRn\WebDevPortRn.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="WebDevDAL">
       <HintPath>..\WebDevDAL\WebDevDAL\WebDevDAL\bin\Debug\net10.0\WebDevDAL.dll</HintPath>
     </Reference>
-    <Reference Include="WebDevPortRn">
-      <HintPath>..\WebDevPortRn\WebDevPortRn\WebDevPortRn\bin\Debug\net10.0\WebDevPortRn.dll</HintPath>
+    <Reference Include="WebDevPort">
+      <HintPath>..\Bin\Debug\net10.0\WebDevPort.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
