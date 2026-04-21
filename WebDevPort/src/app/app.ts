@@ -8,5 +8,5 @@ import { Home } from './home/components/home.component';
   styleUrl: './app.scss'
 })
 export class App {
-  protected title = 'WebDevPort';
+  
 }

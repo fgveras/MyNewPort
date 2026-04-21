@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System.Text.Json;
 using WebDevPortRn.Models;
+using WebDevDAL.APOD;
 
 namespace WebDevPortRn.APOD
 {
@@ -64,6 +65,21 @@ namespace WebDevPortRn.APOD
                 throw new Exception($"Error: {response.StatusCode}");
             }
         }
+
+        public string CreatePhoto(GetPhotoModel record)
+        {
+            ApodDal ApodDal_Service = new ApodDal();
+
+            ApodDal_Service.Create(
+                record.copyright, record.date, 
+                record.explanation, record.hdurl, 
+                record.media_type, record.service_version, 
+                record.title, record.url
+            );
+
+            return string.Empty;
+
+        }   
 
     }
 }

@@ -27,9 +27,15 @@ namespace WebDevDAL
             return dataTable;
         }
 
-        private void Create()
+        private void Create(string command)
         {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(command, conn))
+                {                    
 
+                }
+            }
         }
 
         private void Update()

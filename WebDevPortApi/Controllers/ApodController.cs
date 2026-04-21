@@ -52,5 +52,16 @@ namespace apod.Controllers
         {
             return Ok();
         }
+
+        [HttpPut("CreatePhoto")]
+        public IActionResult CreatePhoto([FromBody] GetPhotoModel record)
+        {
+
+            GenericResponse<string> ret = new GenericResponse<string>();
+
+            ret.Data = _apodService.CreatePhoto(record);
+
+            return Ok();
+        }
     }
 }

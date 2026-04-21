@@ -51,7 +51,26 @@ export class ApodService {
     return this._HttpClient
       .get<GenericResponse<GetPhotoModel[]>>(url, {params: params, headers: headers})
         .pipe(take(1), tap(response => {
+          if(response.Error)
+            throw Error(response.ErrorMessage);
+        }
+    ))
+
+  }
+
+  public createImage(record: GetPhotoModel): Observable<GenericResponse<string>> {
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    
+    const url = `${this._BASE_URL}/CreatePhoto`;
+
+    return this._HttpClient
+      .put<GenericResponse<string>>(url, record, {headers: headers})
+        .pipe(take(1), tap(response => {
           
+          if(response.Error)
+            throw Error(response.ErrorMessage);          
         }
     ))
 

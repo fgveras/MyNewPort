@@ -12,4 +12,9 @@ export const routes: Routes = [
         loadChildren: () => 
             import('./APOD/APOD.routes').then(r => r.APOD_ROUTER)
     },
+    {
+        path: "finnas",
+        loadChildren: () => 
+            import('./finnas/finnas.routes').then(r => r.FINNAS_ROUTING)
+    },
 ]

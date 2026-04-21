@@ -19,6 +19,7 @@ export class ApodComponent {
   public imageSource2: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48gR5XDZPpi5F8QEitXQUPEBvgeksGD2OKg&s';
   public imageSource3: string = 'https://i.pinimg.com/236x/d8/ba/8a/d8ba8a1b747682d7a91a76fedf7660b0.jpg';
   public imageList: GetPhotoModel[] = [];
+  public record: GetPhotoModel = new GetPhotoModel();
   public exp: string = '';
 
   public isLoading: boolean = false;
@@ -33,6 +34,7 @@ export class ApodComponent {
     this.isLoading = true;
     this._service.teste().subscribe({
       next: response => {
+        this.record = response.data;
         this.exp = response.data.explanation;
         this.imageSource = response.data.hdurl;
         this.isLoading = false;
@@ -67,6 +69,7 @@ export class ApodComponent {
   public clearImage(){
     this.imageSource = '';
     this.exp = '';
+    this.imageList = [];
   }
 
   public download(){
@@ -78,6 +81,16 @@ export class ApodComponent {
 
     document.body.appendChild(link);
     link.click();
+  }
+
+  public createImage(){
+    this._service.createImage(this.record).subscribe({
+      next: response => {
+        alert('Imagem salva no banco de dados com sucesso!')
+      }, error: error => {
+        alert('Erro salvando imagem no banco de dados.')
+      }
+    })
   }
 
   public formatDate(oldDate: string): string {
