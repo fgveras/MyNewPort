@@ -21,16 +21,28 @@ namespace WebDevPortRn.APOD
             var client = new RestClient();
             var request = new RestRequest($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}", Method.Get);
 
-            var response = client.ExecuteGet(request);
+            try
+            {
 
-            if(response.StatusCode == System.Net.HttpStatusCode.OK) 
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+
+                var response = client.ExecuteGet(request);
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK) 
+                {
+                    return JsonSerializer.Deserialize<GetPhotoModel>(response.Content);                 
+                }
+                else
+                {
+                    throw new Exception($"Status: {response.StatusCode} | Error: {response.ErrorMessage} | Exception: {response.ErrorException?.Message}");
+                }        
+
+            }
+            catch (Exception)
             {
-                return JsonSerializer.Deserialize<GetPhotoModel>(response.Content);
-                 
-            }else
-            {
-                throw new Exception($"Error: {response.StatusCode}");
-            }        
+
+                throw;
+            }
         }
 
         public List<GetPhotoModel> GetPhotoByPeriod(DateTime initialDate, DateTime finalDate)
@@ -38,6 +50,7 @@ namespace WebDevPortRn.APOD
 
             var client = new RestClient();
             var request = new RestRequest($"https://api.nasa.gov/planetary/apod?api_key={_NASA_API_KEY}&start_date={initialDate.ToString("yyyy-MM-dd")}&end_date={finalDate.ToString("yyyy-MM-dd")}", Method.Get);
+            request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
 
             var response = client.ExecuteGet(request);
 

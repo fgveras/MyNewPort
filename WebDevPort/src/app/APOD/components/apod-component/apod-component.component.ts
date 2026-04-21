@@ -33,11 +33,12 @@ export class ApodComponent {
     this.isLoading = true;
     this._service.teste().subscribe({
       next: response => {
-        this.exp = response.explanation;
-        this.imageSource = response.hdurl;
+        this.exp = response.data.explanation;
+        this.imageSource = response.data.hdurl;
         this.isLoading = false;
       }, error: error => {
         this.isLoading = false;
+        alert(error);
       }
     })
   }
@@ -51,7 +52,7 @@ export class ApodComponent {
     this.isLoading = true;
     this._service.getPeriod(this.form.get('initDate')?.value, this.form.get('endDate')?.value).subscribe({
       next: response => {        
-        this.imageList = response;
+        this.imageList = response.data;
         this.imageList.forEach(i => {
           if(i.hdurl === '')
             this.imageList = this.imageList.filter(j => j !== i);

@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take, tap } from 'rxjs';
-import { GlobalResponse } from '../../../models/returns-types/global-response';
+import { GenericResponse, GlobalResponse } from '../../../models/returns-types/global-response';
 import { GetPhotoModel } from '../models/GetPhotoModel';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ApodService {
     this._BASE_URL = `http://localhost:5278/Apod`;
   }
 
-  public teste(): Observable<GetPhotoModel> {
+  public teste(): Observable<GenericResponse<GetPhotoModel>> {
 
     const params = new HttpParams()
 
@@ -28,15 +28,16 @@ export class ApodService {
     const url = `${this._BASE_URL}/teste`;
 
     return this._HttpClient
-      .get<GetPhotoModel>(url, {params: params, headers: headers})
+      .get<GenericResponse<GetPhotoModel>>(url, {params: params, headers: headers})
         .pipe(take(1), tap(response => {
-          
-        }
+          if(response.Error)
+            throw Error(response.ErrorMessage);
+      }
     ))
 
   }
 
-  public getPeriod(init: string, end: string): Observable<GetPhotoModel[]> {
+  public getPeriod(init: string, end: string): Observable<GenericResponse<GetPhotoModel[]>> {
 
     const params = new HttpParams() 
       .set('intialDate', init)
@@ -48,7 +49,7 @@ export class ApodService {
     const url = `${this._BASE_URL}/GetPriod`;
 
     return this._HttpClient
-      .get<GetPhotoModel[]>(url, {params: params, headers: headers})
+      .get<GenericResponse<GetPhotoModel[]>>(url, {params: params, headers: headers})
         .pipe(take(1), tap(response => {
           
         }
